@@ -1,12 +1,15 @@
 <template>
   <div id="app">
+    <VueGeometryangle />
   </div>
 </template>
 
 <script>
+import VueGeometryangle from './VueGeometryangle.vue'
 
 export default {
   components: {
+    VueGeometryangle
   },
   data() {
     return {

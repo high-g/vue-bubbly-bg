@@ -1,5 +1,5 @@
 {
-  "name": "vue-geometory-bg",
+  "name": "vue-geometryangle",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "three": "^0.106.2",
     "vue": "^2.6.10"
   },
   "devDependencies": {
