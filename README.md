@@ -1,4 +1,4 @@
-vue-geometryangle
+vue-geometry-bg
 ====
 
 ## Demo

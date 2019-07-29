@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <VueGeometryangle />
+    <VueGeometryBg />
   </div>
 </template>
 
 <script>
-import VueGeometryangle from './VueGeometryangle.vue'
+import VueGeometryBg from './VueGeometryBg.vue'
 
 export default {
   components: {
-    VueGeometryangle
+    VueGeometryBg
   },
   data() {
     return {
