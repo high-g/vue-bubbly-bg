@@ -21,10 +21,6 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: sans-serif;
-  color: #2c3e50;
-}
 .mb10 {margin-bottom: 10px;}
 .mb20 {margin-bottom: 20px;}
 .mb30 {margin-bottom: 30px;}
