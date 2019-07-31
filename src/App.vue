@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <VueGeometryBg />
+    <VueBubblyBg />
   </div>
 </template>
 
 <script>
-import VueGeometryBg from './VueGeometryBg.vue'
+import VueBubblyBg from './VueBubblyBg.vue'
 
 export default {
   components: {
-    VueGeometryBg
+    VueBubblyBg
   },
   data() {
     return {

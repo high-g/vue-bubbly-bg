@@ -1,4 +1,4 @@
-vue-geometry-bg
+vue-bubbly-bg
 ====
 
 ## Demo
