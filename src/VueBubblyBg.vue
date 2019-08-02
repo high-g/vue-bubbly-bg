@@ -1,42 +1,89 @@
 <template>
-  <canvas id="canvas"></canvas>
+  <canvas></canvas>
 </template>
 
 <script>
 export default {
-  el: '#canvas',
   props: {
   },
   data() {
     return {
-      ctx: null
+      ctx: null,
+      width: 0,
+      height: 0,
+      circleManage: [],
+      drawCount: 0
     }
   },
   computed: {
   },
-  created() {
-  },
   mounted() {
-    console.log()
-    this.$el.width = window.innerWidth
-    this.$el.height = window.innerHeight
-    this.ctx = this.$el.getContext('2d')
-    this.drawCircle(50, 50, 30)
-    this.drawCircle(600, 100, 30)
-    this.drawCircle(100, 200, 30)
+    this.settingCanvas()
+    this.initPoint()
+    requestAnimationFrame(this.draw)
   },
   methods: {
-    drawCircle(x, y, r) {
+    settingCanvas() {
+      this.width = window.innerWidth
+      this.height = window.innerHeight
+      this.ctx = this.$el.getContext('2d')
+      this.$el.width = this.width
+      this.$el.height = this.height
+    },
+    initPoint() {
+      this.circleManage = []
+
+      // 乱数（20〜50）取得
+      const circleNum = Math.floor(Math.random() * (50 - 20) + 20)
+      let cnt = 0
+
+      while(cnt < circleNum) {
+        // それぞれの円の大きさ (最大 - 最小) + 最小
+        this.circleManage.push({
+          x: Math.floor(Math.random() * (this.width - 0) + 0),
+          y: Math.floor(Math.random() * (this.height - 0) + 0),
+          r: Math.floor(Math.random() * (50 - 5) + 5),
+          moveX: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1),
+          moveY: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1)
+        })
+        cnt++
+      }
+    },
+    calcPoint(arg, num) {
+      arg.x += arg.moveX
+      arg.y += arg.moveY
+
+      if(arg.x < 0) {
+        arg.x = this.width
+      } else if (arg.x > this.width) {
+        arg.x = 0
+      }
+
+      if(arg.y < 0) {
+        arg.y = this.height
+      } else if (arg.y > this.height) {
+        arg.y = 0
+      }
+
+      this.circleManage[num] = arg
+    },
+    settingCircle(arg) {
       this.ctx.beginPath()
-      this.ctx.arc(x, y, r, 0, Math.PI*2, false)
+      this.ctx.arc(arg.x, arg.y, arg.r, 0, Math.PI*2, false)
+      this.ctx.closePath()
       this.ctx.stroke()
     },
-    drawRandomCircle() {
+    draw() {
+      this.ctx.clearRect(0, 0, this.width, this.height)
 
+
+      for(let i in this.circleManage) {
+        this.calcPoint(this.circleManage[i], i)
+        this.settingCircle(this.circleManage[i])
+      }
+
+      requestAnimationFrame(this.draw)
     },
-    drawPolygon() {
-      return ''
-    }
   }
 }
 </script>
