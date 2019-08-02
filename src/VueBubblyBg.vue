@@ -38,13 +38,16 @@ export default {
       let cnt = 0
 
       while(cnt < circleNum) {
+        const lightness =  Math.floor(Math.random() * (80 - 40) + 50);
+
         // それぞれの円の大きさ (最大 - 最小) + 最小
         this.circleManage.push({
           x: Math.floor(Math.random() * (this.width - 0) + 0),
           y: Math.floor(Math.random() * (this.height - 0) + 0),
           r: Math.floor(Math.random() * (50 - 5) + 5),
           moveX: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1),
-          moveY: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1)
+          moveY: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1),
+          color: `hsl(20, 100%, ${lightness}%)`
         })
         cnt++
       }
@@ -70,6 +73,9 @@ export default {
     settingCircle(arg) {
       this.ctx.beginPath()
       this.ctx.arc(arg.x, arg.y, arg.r, 0, Math.PI*2, false)
+      this.ctx.strokeStyle = arg.color
+      this.ctx.fillStyle = arg.color
+      this.ctx.fill();
       this.ctx.closePath()
       this.ctx.stroke()
     },
