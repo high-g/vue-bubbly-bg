@@ -1,10 +1,11 @@
 <template>
-  <canvas></canvas>
+  <canvas :style="backgroundColor"></canvas>
 </template>
 
 <script>
 export default {
   props: {
+    bgColor: String, // canvasの背景色
     colorString: String, // 色パターン文字列
     colorNum: [Number, String], // 色hsl 色相値 0〜360
     circleNum: [Number, String], // 円の数
@@ -37,6 +38,12 @@ export default {
         purplered: 315,
         lightred: 340
       }
+    }
+  },
+  computed: {
+    backgroundColor() {
+      console.log('backgroundColor', this.bgColor)
+      return `background-color: ${this.bgColor}`
     }
   },
   mounted() {

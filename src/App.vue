@@ -18,6 +18,7 @@
     <section id="content1" class="mb100">
       <h2>Content1</h2>
       <p>
+        bgColor="blue"
         colorString="orange"
         circleNum="500"
         circleSpeed="veryfast"
@@ -25,6 +26,7 @@
       </p>
 
       <VueBubblyBg
+        bgColor="#333"
         colorString="orange"
         circleNum="300"
         circleSpeed="veryfast"
@@ -35,6 +37,7 @@
     <section id="content2" class="mb100">
       <h2>Content2</h2>
       <p>
+        bgColor="rgba(255,0,0,0.5)"
         colorString="green"
         circleNum="100"
         circleSpeed="slow"
@@ -43,6 +46,7 @@
       </p>
 
       <VueBubblyBg
+        bgColor="rgba(255,0,0,0.5)"
         colorString="green"
         circleNum="100"
         circleSpeed="slow"
