@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <VueBubblyBg />
+    <VueBubblyBg
+      colorString="orange"
+      circleNum="50"
+    />
   </div>
 </template>
 
@@ -10,12 +13,6 @@ import VueBubblyBg from './VueBubblyBg.vue'
 export default {
   components: {
     VueBubblyBg
-  },
-  data() {
-    return {
-    }
-  },
-  methods: {
   }
 }
 </script>

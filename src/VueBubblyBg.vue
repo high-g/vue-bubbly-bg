@@ -5,6 +5,11 @@
 <script>
 export default {
   props: {
+    colorString: String, // 色パターン文字列
+    colorNum: [Number, String], // 色hsl 色相値 0〜360
+    circleNum: [Number, String], // 円の数
+    speed: String, // 移動スピード(normal, slow, fast)
+    moveType: String // 移動タイプ(random, vertical, horizontal)
   },
   data() {
     return {
@@ -12,10 +17,23 @@ export default {
       width: 0,
       height: 0,
       circleManage: [],
-      drawCount: 0
+      drawCount: 0,
+      colorList: {
+        red: 0,
+        orange: 25,
+        yellow: 60,
+        yellowgreen: 85,
+        green: 110,
+        greenblue: 165,
+        lightblue: 180,
+        blue: 200,
+        bluepurple: 260,
+        purple: 285,
+        lightpuple: 300,
+        purplered: 315,
+        lightred: 340
+      }
     }
-  },
-  computed: {
   },
   mounted() {
     this.settingCanvas()
@@ -23,6 +41,9 @@ export default {
     requestAnimationFrame(this.draw)
   },
   methods: {
+    /**
+     * canvas設定
+     */
     settingCanvas() {
       this.width = window.innerWidth
       this.height = window.innerHeight
@@ -30,15 +51,21 @@ export default {
       this.$el.width = this.width
       this.$el.height = this.height
     },
+
+    /**
+     * 円情報初期設定
+     */
     initPoint() {
       this.circleManage = []
 
-      // 乱数（20〜50）取得
-      const circleNum = Math.floor(Math.random() * (50 - 20) + 20)
+      // 乱数取得
+      const maxNum = this.circleNum || 50
+      const minNum = this.circleNum ? this.circleNum / 2 : 25
+      const circleNum = Math.floor(Math.random() * (maxNum - minNum) + minNum)
       let cnt = 0
 
       while(cnt < circleNum) {
-        const lightness =  Math.floor(Math.random() * (80 - 40) + 50);
+        const lightness =  Math.floor(Math.random() * (80 - 40) + 50)
 
         // それぞれの円の大きさ (最大 - 最小) + 最小
         this.circleManage.push({
@@ -47,12 +74,46 @@ export default {
           r: Math.floor(Math.random() * (50 - 5) + 5),
           moveX: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1),
           moveY: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1),
-          color: `hsl(20, 100%, ${lightness}%)`
+          color: `hsl(${this.desideColorNum()}, 100%, ${lightness}%)`
         })
         cnt++
       }
     },
-    calcPoint(arg, num) {
+
+    /**
+     * 描画
+     */
+    draw() {
+      // リセット
+      this.ctx.clearRect(0, 0, this.width, this.height)
+
+      for(let i in this.circleManage) {
+        this.calcPoint(this.circleManage[i], i)
+        this.settingCircle(this.circleManage[i])
+      }
+
+      requestAnimationFrame(this.draw)
+    },
+
+    /**
+     * 色情報
+     */
+    desideColorNum() {
+      let num = 200
+      if(this.colorString) {
+        num = this.colorList[this.colorString] || num
+      } else if(!isNaN(this.colorNum)) {
+        num = this.colorNum
+      }
+      return num
+    },
+
+    /**
+     * 円移動座標計算
+     * @param arg 円一つ分の情報
+     * @param i 配列キー
+     */
+    calcPoint(arg, i) {
       arg.x += arg.moveX
       arg.y += arg.moveY
 
@@ -68,8 +129,13 @@ export default {
         arg.y = 0
       }
 
-      this.circleManage[num] = arg
+      this.circleManage[i] = arg
     },
+
+    /**
+     * 円情報描画設定
+     * @param arg
+     */
     settingCircle(arg) {
       this.ctx.beginPath()
       this.ctx.arc(arg.x, arg.y, arg.r, 0, Math.PI*2, false)
@@ -78,17 +144,6 @@ export default {
       this.ctx.fill();
       this.ctx.closePath()
       this.ctx.stroke()
-    },
-    draw() {
-      this.ctx.clearRect(0, 0, this.width, this.height)
-
-
-      for(let i in this.circleManage) {
-        this.calcPoint(this.circleManage[i], i)
-        this.settingCircle(this.circleManage[i])
-      }
-
-      requestAnimationFrame(this.draw)
     },
   }
 }
