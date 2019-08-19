@@ -65,7 +65,6 @@
       </p>
 
       <VueBubblyBg
-        class="mb100"
         colorString="purple"
         circleNum="20"
         circleSize="big"
@@ -127,7 +126,7 @@ h1 {
 
 #content2 {
   width: 60%;
-  height: 400px;
+  height: 800px;
 }
 
 #content3 {
