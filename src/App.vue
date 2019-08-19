@@ -2,7 +2,10 @@
   <div id="app">
     <VueBubblyBg
       colorString="orange"
-      circleNum="50"
+      circleNum="10"
+      circleSpeed="fast"
+      circleSize="big"
+      moveType="vertical"
     />
   </div>
 </template>

@@ -8,8 +8,10 @@ export default {
     colorString: String, // 色パターン文字列
     colorNum: [Number, String], // 色hsl 色相値 0〜360
     circleNum: [Number, String], // 円の数
-    speed: String, // 移動スピード(normal, slow, fast)
-    moveType: String // 移動タイプ(random, vertical, horizontal)
+    circleSpeed: String, // 移動スピード(veryslow, slow, fast, veryfast)
+    circleSize: String, // 円の大きさ(verysmall, small, big, verybig)
+    flgSizeFix: [Boolean, String], // 固定円サイズ(指定がなければランダム)
+    moveType: String // 移動タイプ(vert horizon)
   },
   data() {
     return {
@@ -18,6 +20,8 @@ export default {
       height: 0,
       circleManage: [],
       drawCount: 0,
+      moveVertical: 1,
+      moveHorizontal: 1,
       colorList: {
         red: 0,
         orange: 25,
@@ -58,22 +62,76 @@ export default {
     initPoint() {
       this.circleManage = []
 
-      // 乱数取得
+      // 表示数用 乱数取得
       const maxNum = this.circleNum || 50
       const minNum = this.circleNum ? this.circleNum / 2 : 25
       const circleNum = Math.floor(Math.random() * (maxNum - minNum) + minNum)
       let cnt = 0
 
+      // 円の移動スピード veryslow, slow, fast, veryfast
+      let speed = 1.0;
+      switch (this.circleSpeed) {
+        case 'veryslow':
+          speed = 0.1;
+          break;
+        case 'slow':
+          speed = 0.5;
+          break;
+        case 'fast':
+          speed = 2.0;
+          break;
+        case 'veryfast':
+          speed = 5.0;
+          break;
+      }
+
+      // 円の大きさ verysmall, small, big, verybig
+      let sizeRate = 1.0
+      switch (this.circleSize) {
+        case 'verysmall':
+          sizeRate = 0.1;
+          break;
+        case 'small':
+          sizeRate = 0.5;
+          break;
+        case 'big':
+          sizeRate = 2.0;
+          break;
+        case 'verybig':
+          sizeRate = 5.0;
+          break;
+      }
+
+      // 移動タイプ vert horizon
+      switch (this.moveType) {
+        case 'vert':
+          this.moveHorizontal = 0
+          break;
+        case 'horizon':
+          this.moveVertical = 0
+          break;
+      }
+
+
+      // 円サイズベース
+      let baseSize = 50
+
       while(cnt < circleNum) {
+        // 輝度
         const lightness =  Math.floor(Math.random() * (80 - 40) + 50)
+
+        // 円サイズ固定フラグ
+        if(this.flgSizeFix === false) {
+          baseSize = Math.floor(Math.random() * (50 - 5) + 5)
+        }
 
         // それぞれの円の大きさ (最大 - 最小) + 最小
         this.circleManage.push({
           x: Math.floor(Math.random() * (this.width - 0) + 0),
           y: Math.floor(Math.random() * (this.height - 0) + 0),
-          r: Math.floor(Math.random() * (50 - 5) + 5),
-          moveX: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1),
-          moveY: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1),
+          r: baseSize * sizeRate,
+          moveX: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1) * speed * this.moveHorizontal,
+          moveY: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1) * speed * this.moveVertical,
           color: `hsl(${this.desideColorNum()}, 100%, ${lightness}%)`
         })
         cnt++
