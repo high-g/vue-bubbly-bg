@@ -1,12 +1,73 @@
 <template>
   <div id="app">
-    <VueBubblyBg
-      colorString="orange"
-      circleNum="10"
-      circleSpeed="fast"
-      circleSize="big"
-      moveType="vertical"
-    />
+    <h1>vue-bubbly-bg</h1>
+
+    <section id="hero" class="mb50">
+      <VueBubblyBg/>
+      <p class="hero--title">
+        Love the life you live. Live the life you love.<br>
+        Stay hungry. Stay foolish.<br>
+        Your time is limited, so don’t waste it living someone else’s life.<br>
+        If it can be imagined, it can be created.<br>
+        If you want to be happy, be.<br>
+        Happiness depends upon ourselves.<br>
+        Every day is a new day.
+      </p>
+    </section>
+
+    <section id="content1" class="mb100">
+      <h2>Content1</h2>
+      <p>
+        colorString="orange"
+        circleNum="500"
+        circleSpeed="veryfast"
+        circleSize="verysmall"
+      </p>
+
+      <VueBubblyBg
+        colorString="orange"
+        circleNum="300"
+        circleSpeed="veryfast"
+        circleSize="verysmall"
+      />
+    </section>
+
+    <section id="content2" class="mb100">
+      <h2>Content2</h2>
+      <p>
+        colorString="green"
+        circleNum="100"
+        circleSpeed="slow"
+        circleSize="small"
+        moveType="horizon"
+      </p>
+
+      <VueBubblyBg
+        colorString="green"
+        circleNum="100"
+        circleSpeed="slow"
+        circleSize="small"
+        moveType="horizon"
+      />
+    </section>
+
+    <section id="content3">
+      <h2>Content3</h2>
+      <p>
+        colorString="purple"
+        circleNum="20"
+        circleSize="big"
+        moveType="vert"
+      </p>
+
+      <VueBubblyBg
+        class="mb100"
+        colorString="purple"
+        circleNum="20"
+        circleSize="big"
+        moveType="vert"
+      />
+    </section>
   </div>
 </template>
 
@@ -32,4 +93,41 @@ export default {
 .mb90 {margin-bottom: 90px;}
 .mb100 {margin-bottom: 100px;}
 
+body {
+  font-family: 'Arial',YuGothic,'Yu Gothic','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', Meiryo,'ＭＳ ゴシック',sans-serif;
+}
+
+h1 {
+  margin-left: 10px;
+}
+
+#hero {
+  width: 100%;
+  height: 450px;
+  position: relative;
+}
+
+.hero--title {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  color: #666;
+  line-height: 1.4;
+  letter-spacing: 1px;
+}
+
+#content1 {
+  width: 100%;
+  height: 600px;
+}
+
+#content2 {
+  width: 60%;
+  height: 400px;
+}
+
+#content3 {
+  width: 60%;
+  height: 500px;
+}
 </style>

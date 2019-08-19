@@ -43,14 +43,19 @@ export default {
     this.settingCanvas()
     this.initPoint()
     requestAnimationFrame(this.draw)
+    window.addEventListener('resize', this.settingCanvas)
+  },
+  beforeDestroy: function () {
+    window.removeEventListener('resize', this.settingCanvas)
   },
   methods: {
     /**
      * canvas設定
      */
     settingCanvas() {
-      this.width = window.innerWidth
-      this.height = window.innerHeight
+      const parent = this.$el.parentNode
+      this.width = parent.clientWidth
+      this.height = parent.clientHeight
       this.ctx = this.$el.getContext('2d')
       this.$el.width = this.width
       this.$el.height = this.height
@@ -63,8 +68,8 @@ export default {
       this.circleManage = []
 
       // 表示数用 乱数取得
-      const maxNum = this.circleNum || 50
-      const minNum = this.circleNum ? this.circleNum / 2 : 25
+      const maxNum = this.circleNum || 30
+      const minNum = this.circleNum ? this.circleNum / 2 : 10
       const circleNum = Math.floor(Math.random() * (maxNum - minNum) + minNum)
       let cnt = 0
 
@@ -95,10 +100,10 @@ export default {
           sizeRate = 0.5;
           break;
         case 'big':
-          sizeRate = 2.0;
+          sizeRate = 2.5;
           break;
         case 'verybig':
-          sizeRate = 5.0;
+          sizeRate = 4.5;
           break;
       }
 
@@ -130,8 +135,8 @@ export default {
           x: Math.floor(Math.random() * (this.width - 0) + 0),
           y: Math.floor(Math.random() * (this.height - 0) + 0),
           r: baseSize * sizeRate,
-          moveX: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1) * speed * this.moveHorizontal,
-          moveY: Math.random() * Math.random() * (Math.random() < 0.5 ? -1 : 1) * speed * this.moveVertical,
+          moveX: Math.random() * (Math.random() < 0.5 ? -1 : 1) * speed * this.moveHorizontal,
+          moveY: Math.random() * (Math.random() < 0.5 ? -1 : 1) * speed * this.moveVertical,
           color: `hsl(${this.desideColorNum()}, 100%, ${lightness}%)`
         })
         cnt++
@@ -158,8 +163,8 @@ export default {
      */
     desideColorNum() {
       let num = 200
-      if(this.colorString) {
-        num = this.colorList[this.colorString] || num
+      if(this.colorList.hasOwnProperty(this.colorString)) {
+        num = this.colorList[this.colorString]
       } else if(!isNaN(this.colorNum)) {
         num = this.colorNum
       }
