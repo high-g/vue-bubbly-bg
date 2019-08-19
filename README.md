@@ -2,8 +2,7 @@ vue-bubbly-bg
 ====
 円を用いたcanvasアニメーションコンポーネント。背景として利用可能。  
 canvas系のライブラリは使用していない為、競合等の心配はありません。  
-↓こちらにインスパイアされ、Vue.js用に作成。  
-https://github.com/tipsy/bubbly-bg
+bubbly-bgにインスパイアされ、Vue.js用に作成しました。  
 
 ## Demo
 https://high-g.github.io/vue-bubbly-bg/
