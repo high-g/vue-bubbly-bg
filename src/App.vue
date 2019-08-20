@@ -18,9 +18,9 @@
     <section id="content1" class="mb100">
       <h2>Content1</h2>
       <p>
-        bgColor="blue"
+        bgColor="#333"
         colorString="orange"
-        circleNum="500"
+        circleNum="300"
         circleSpeed="veryfast"
         circleSize="verysmall"
       </p>

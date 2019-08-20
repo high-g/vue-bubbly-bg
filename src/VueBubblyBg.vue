@@ -42,7 +42,6 @@ export default {
   },
   computed: {
     backgroundColor() {
-      console.log('backgroundColor', this.bgColor)
       return `background-color: ${this.bgColor}`
     }
   },
