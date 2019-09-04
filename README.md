@@ -1,5 +1,5 @@
-vue-bubbly-bg
-====
+#vue-bubbly-bg
+
 円を用いたcanvasアニメーションコンポーネント。背景として利用可能。  
 bubbly-bgにインスパイアされ、Vue.js用に作成しました。  
 canvas系のライブラリは使用していない為、競合等の心配はありません。  
